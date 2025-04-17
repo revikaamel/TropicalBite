@@ -11,73 +11,105 @@
 <body class="bg-gray-100">
 
 <!-- Navbar -->
-<nav class="bg-white px-6 py-4 flex items-center justify-between shadow-md relative">
-    <!-- Logo -->
-    <div class="absolute left-1/2 transform -translate-x-1/2">
+<nav class="bg-white px-6 py-4 shadow-md relative">
+    <div class="flex items-center justify-between md:justify-start relative w-full">
+  
+      <!-- Tombol hamburger (kiri di mobile) -->
+      <button id="menu-toggle" class="md:hidden text-black focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+  
+      <!-- Mobile Get Started (kanan) -->
+      <div class="md:hidden ml-auto">
+        <a href="#get-started" class="bg-black text-white px-4 py-1 rounded text-sm">Get Started</a>
+      </div>
+  
+      <!-- Menu Desktop (kiri) -->
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="#hero" class="text-black hover:text-gray-600">Home</a>
+        <a href="#tentang-buah-kami" class="text-black hover:text-gray-600">About Us</a>
+        <a href="#fruits" class="text-black hover:text-gray-600">Fruits</a>
+        <a href="#testimoni" class="text-black hover:text-gray-600">Testimonial</a>
+        <a href="#subscription" class="text-black hover:text-gray-600">Contact</a>
+      </div>
+  
+      <!-- Logo Tengah -->
+      <div class="absolute left-1/2 transform -translate-x-1/2">
         <span class="text-xl font-bold">TROPICALBITE</span>
+      </div>
+  
+      <!-- Get Started Desktop (kanan) -->
+      <div class="hidden md:block ml-auto">
+        <a href="#get-started" class="bg-black text-white px-5 py-2 rounded text-sm sm:text-lg">Get Started</a>
+      </div>
+  
     </div>
+  </nav>
+  
 
-    <!-- Desktop Menu -->
-    <div class="hidden md:flex space-x-6">
+<!-- Mobile Sidebar -->
+<div id="mobile-menu" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 transform -translate-x-full transition-transform duration-300 md:hidden">
+    <div class="p-6 space-y-6 flex flex-col">
         <a href="#hero" class="text-black hover:text-gray-600">Home</a>
         <a href="#tentang-buah-kami" class="text-black hover:text-gray-600">About Us</a>
         <a href="#fruits" class="text-black hover:text-gray-600">Fruits</a>
         <a href="#testimoni" class="text-black hover:text-gray-600">Testimonial</a>
-        <a href="#sosmed" class="text-black hover:text-gray-600">Contact</a>
-    </div>
-
-    <!-- Get Started Button (Desktop) -->
-    <a href="#subscription" class="bg-black text-white px-4 py-2 rounded hidden md:block">Get Started</a>
-
-    <!-- Mobile Menu Icon (Hamburger) -->
-    <div class="md:hidden flex items-center">
-        <button id="mobile-menu-button" class="text-2xl">
-            <i class="fas fa-bars"></i> <!-- Tombol Hamburger -->
-        </button>
-    </div>
-</nav>
-
-<!-- Mobile Menu Dropdown -->
-<div id="mobile-menu" class="md:hidden hidden absolute top-16 left-0 w-full bg-white shadow-md z-50">
-    <div class="flex flex-col items-center space-y-4 py-4">
-        <a href="#hero" class="text-black hover:text-gray-600">Home</a>
-        <a href="#tentang-buah-kami" class="text-black hover:text-gray-600">About Us</a>
-        <a href="#fruits" class="text-black hover:text-gray-600">Fruits</a>
-        <a href="#testimoni" class="text-black hover:text-gray-600">Testimonial</a>
-        <a href="#sosmed" class="text-black hover:text-gray-600">Contact</a>
-        <!-- Get Started Button (Mobile) -->
-        <a href="#subscription" class="bg-black text-white px-4 py-2 rounded">Get Started</a>
+        <a href="#subscription" class="text-black hover:text-gray-600">Contact</a>
+        <button id="close-menu" class="mt-4 text-red-500 hover:underline">Close</button>
     </div>
 </div>
-
-<!-- Script for Toggle Mobile Menu -->
 <script>
-    const menuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    // Toggle mobile menu visibility
-    menuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
+  const toggleBtn = document.getElementById('menu-toggle');
+  const closeBtn = document.getElementById('close-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  toggleBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('-translate-x-full'); // Sidebar masuk
+  });
+
+  closeBtn.addEventListener('click', () => {
+    mobileMenu.classList.add('-translate-x-full'); // Sidebar keluar
+  });
+
+  // Optional: Tutup sidebar saat link diklik
+  const menuLinks = mobileMenu.querySelectorAll('a');
+  menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('-translate-x-full'); // Sidebar keluar
     });
+  });
 </script>
 
 <!-- Hero Section -->
-     <section id="hero" class="bg-[#ffeb3b] py-20 px-6 flex items-center justify-center">
-        <div class="max-w-5xl flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 text-center md:text-left">
-                <h1 class="text-4xl font-bold mb-4">Enjoy The Fresh Taste of Tropical Fruits</h1>
-                <p class="text-lg text-gray-800 mb-6">Kami menyediakan buah tropis segar, alami, dan kaya nutrisi langsung dari petani terbaik.</p>
-                <a href="#buah-unggulan" class="bg-black text-white px-6 py-3 rounded text-lg">Explore Our Featured Fruits</a>
-            </div>
-            <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center">
-                <img src="page 1.jpg" alt="Tropical Fruits" class="rounded-lg shadow-lg">
-            </div>
-        </div>
-    </section>
-
+<section id="hero" class="bg-[#ffeb3b] py-20 px-4 flex items-center justify-center">
+    <div class="max-w-5xl w-full flex flex-row items-center justify-between gap-4 flex-nowrap">
+  
+      <!-- Teks + Button -->
+      <div class="w-1/2 flex flex-col justify-center text-left">
+        <h1 class="text-xl sm:text-3xl font-bold mb-4">
+          Enjoy The Fresh Taste of Tropical Fruits
+        </h1>
+        <p class="text-sm sm:text-lg text-gray-800 mb-6">
+          Kami menyediakan buah tropis segar, alami, dan kaya nutrisi langsung dari petani terbaik.
+        </p>
+        <a href="#buah-unggulan" class="bg-black text-white px-5 py-2 rounded text-sm sm:text-lg w-fit">
+          Explore Our Featured Fruits
+        </a>
+      </div>
+  
+      <!-- Gambar -->
+      <div class="w-1/2 flex justify-center">
+        <img src="page 1.jpg" alt="Tropical Fruits" class="rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm">
+      </div>
+  
+    </div>
+</section>
+  
 
 <!-- Section Why Choose TropicalBite -->
-    <section id="hero" class="bg-[#f9a825] py-24 px-6 relative">
+    <section id="hero" class="bg-[#f9a825] py-20 px-6 relative">
         <div class="text-center max-w-3xl mx-auto">
             <h2 class="text-3xl font-bold text-white mb-8">Why Choose TropicalBite?</h2>
             <p class="text-white text-lg mb-12">Kami menghadirkan buah segar pilihan dengan kualitas terbaik, kaya vitamin, dan 100% alami. Dapatkan manfaat sehat setiap hari.</p>
@@ -90,83 +122,106 @@
     </section>
 
  <!-- Tentang Buah Kami -->
-    <section id="tentang-buah-kami" class="bg-[#ffeb3b] py-20 px-6 flex items-center justify-center">
-        <div class="max-w-5xl flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2">
-                <h2 class="text-3xl font-bold mb-4">Nikmati Buah Segar dengan Manfaat Luar Biasa</h2>
-                <p class="text-lg text-gray-800 mb-6">Buah tropis kami dipilih langsung dari petani lokal dan dikemas dengan standar terbaik untuk kesegaran maksimal.</p>
-                <ul class="list-none space-y-3">
-                    <li class="flex items-center"><span class="text-black text-xl mr-2">•</span> Kualitas Premium</li>
-                    <li class="flex items-center"><span class="text-black text-xl mr-2">•</span> 100% Organik</li>
-                    <li class="flex items-center"><span class="text-black text-xl mr-2">•</span> Pengiriman Cepat</li>
-                </ul>
-            </div>
-            <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center">
-                <img src="testi.jpg" alt="Geometric Fruits" class="rounded-lg shadow-lg w-80">
-            </div>
-        </div>
-    </section>
-
+<section id="tentang-buah-kami" class="bg-[#ffeb3b] py-16 px-4 flex items-center justify-center">
+    <div class="max-w-5xl w-full flex flex-row items-center justify-between gap-6 flex-nowrap">
+  
+      <!-- Teks -->
+      <div class="w-1/2">
+        <h2 class="text-xl sm:text-3xl font-bold mb-4">Nikmati Buah Segar dengan Manfaat Luar Biasa</h2>
+        <p class="text-sm sm:text-lg text-gray-800 mb-6">
+          Buah tropis kami dipilih langsung dari petani lokal dan dikemas dengan standar terbaik untuk kesegaran maksimal.
+        </p>
+        <ul class="list-none space-y-3 text-sm sm:text-base">
+          <li class="flex items-center"><span class="text-black text-xl mr-2">•</span> Kualitas Premium</li>
+          <li class="flex items-center"><span class="text-black text-xl mr-2">•</span> 100% Organik</li>
+          <li class="flex items-center"><span class="text-black text-xl mr-2">•</span> Pengiriman Cepat</li>
+        </ul>
+      </div>
+  
+      <!-- Gambar -->
+      <div class="w-1/2 flex justify-center">
+        <img src="testi.jpg" alt="Geometric Fruits" class="rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm">
+      </div>
+  
+    </div>
+</section>
+  
 <!-- Subscription Section -->
-    <section id="subscription" class="flex flex-col md:flex-row h-auto md:h-screen">
-        <!-- Gambar Buah Segar -->
-        <div class="w-full md:w-1/2 flex items-center justify-center bg-white p-4">
-            <img src="page 4.png" alt="Buah Segar" class="max-w-[90%] h-auto rounded-lg">
+<section id="subscription" class="flex flex-col md:flex-row w-full">
+    <!-- Kolom Gambar -->
+    <div class="w-full md:w-1/2 bg-white flex items-center justify-center p-6">
+      <img src="page 4.png" alt="Buah Segar" class="w-full max-w-[400px] h-auto rounded-lg">
+    </div>
+  
+    <!-- Kolom Konten -->
+    <div class="w-full md:w-1/2 bg-[#f9a825] flex items-center justify-center p-6">
+      <div class="text-white max-w-md">
+        <h2 class="text-2xl font-bold mb-4">Langganan Buah Setiap Hari</h2>
+        <p class="text-base mb-5">
+          Jadikan gaya hidup sehat lebih mudah dengan berlangganan buah segar kami. Pilih paket sesuai kebutuhan dan nikmati kemudahan tanpa ribet.
+        </p>    
+  
+        <!-- Social Media Section -->
+        <div class="flex flex-col items-start gap-5">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/TropicalBite" target="_blank" class="flex items-center hover:underline">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="w-6 h-6 mr-2">
+            <span>@TropicalBite</span>
+          </a>  
+  
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/TropicalBite" target="_blank" class="flex items-center hover:underline">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="w-6 h-6 mr-2">
+            <span>@TropicalBite</span>
+          </a>  
+  
+          <button class="bg-black text-white px-5 py-2 rounded hover:opacity-80 mt-4">
+            Learn More
+          </button>
         </div>
-        
-        <!-- Sosial Media dan Konten -->
-        <div id="sosmed" class="w-full md:w-1/2 bg-[#f9a825] p-6 md:p-10 flex flex-col justify-center text-left">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4">Langganan Buah Setiap Hari</h2>
-            <p class="text-base md:text-lg mb-5">
-                Jadikan gaya hidup sehat lebih mudah dengan berlangganan buah segar kami. Pilih paket sesuai kebutuhan dan nikmati kemudahan tanpa ribet.
-            </p>    
-    
-            <!-- Social Media Section -->
-            <div class="flex flex-col space-y-5">
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/TropicalBite" target="_blank" class="flex items-center text-black no-underline hover:text-gray-600">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="w-6 h-6 mr-2">
-                    <span>@TropicalBite</span>
-                </a>  
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/TropicalBite" target="_blank" class="flex items-center text-black no-underline hover:text-gray-600">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="w-6 h-6 mr-2">
-                    <span>@TropicalBite</span>
-                </a>  
-    
-                <!-- Learn More Button -->
-                <button class="bg-black text-white py-2 px-6 rounded-md hover:opacity-80">
-                    Learn More
-                </button>
-            </div>
-        </div>
-    </section>
+      </div>
+    </div>
+  </section>
+  
+  
 
 <!-- Buah Tropis Premium -->
-    <section class="flex flex-col md:flex-row items-center justify-between bg-[#ffeb3b] p-6 md:p-20 h-auto md:h-screen">
-        <!-- Teks -->
-        <div class="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0">
-            <h1 class="text-3xl md:text-4xl font-bold mb-4">
-                Buah Tropis Premium, Langsung dari Petani ke Meja Anda
-            </h1>
-            <p class="text-base md:text-lg mb-6">
-                Kami menghadirkan buah tropis segar dengan kualitas terbaik, langsung dari sumbernya ke pintu rumah Anda.
-            </p>
-            <p class="text-gray-600 text-sm md:text-base mb-4">
-                "Buah dari TropicalBite selalu segar dan berkualitas tinggi. Langsung dari petani ke rumah saya."
-            </p>
-            <div class="flex items-center justify-center md:justify-start">
-                <img src="rina.jpg" alt="Avatar" class="w-10 h-10 rounded-full mr-3">
-                <span class="font-semibold">Rina S., Pelanggan Setia</span>
-            </div>
+<section class="bg-[#ffeb3b] py-16 px-4 flex items-center justify-center">
+    <div class="max-w-6xl w-full flex flex-row items-center justify-between gap-6">
+      
+      <!-- Teks -->
+      <div class="w-1/2 min-w-[50%]">
+        <h2 class="text-base sm:text-xl md:text-2xl font-bold mb-4">
+          Buah Tropis Premium, Langsung dari Petani ke Meja Anda
+        </h2>
+        <p class="text-xs sm:text-sm md:text-base text-gray-800 mb-6">
+          Kami menghadirkan buah tropis segar dengan kualitas terbaik, langsung dari sumbernya ke pintu rumah Anda.
+        </p>
+        <p class="text-gray-600 text-xs sm:text-sm md:text-base mb-4 italic">
+          "Buah dari TropicalBite selalu segar dan berkualitas tinggi. Langsung dari petani ke rumah saya."
+        </p>
+        <div class="flex items-center">
+          <img src="rina.jpg" alt="Avatar" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-3">
+          <span class="text-sm sm:text-base font-semibold">Rina S., Pelanggan Setia</span>
         </div>
-    
-        <!-- Gambar dengan Layer Orange -->
-        <div class="w-full md:w-1/2 flex justify-center relative">
-            <div class="absolute bg-[#f9a825] w-[90%] h-full -bottom-8 -right-8 z-0 rounded-lg"></div>
-            <img src="page 5.jpg" alt="Buah Tropis" class="w-4/5 md:w-11/12 h-auto rounded-lg relative z-10">
-        </div>
-    </section>
+      </div>
+  
+      <!-- Gambar + Layer -->
+     <!-- Gambar + Layer Responsive -->
+    <div class="w-full lg:w-1/2 flex justify-center relative">
+    <!-- Layer Oranye -->
+    <div class="absolute bg-[#f9a825] w-[90%] h-[90%] lg:h-full lg:w-[90%] rounded-lg -bottom-3 -right-3 lg:-bottom-8 lg:-right-8 z-0"></div>
+  
+    <!-- Gambar Utama -->
+    <img 
+      src="page 5.jpg" 
+      alt="Buah Tropis" 
+      class="relative z-10 w-full max-w-[220px] sm:max-w-sm lg:max-w-[80%] lg:h-auto rounded-lg shadow-lg lg:rounded-[15px]">
+    </div>
+  
+    </div>
+  </section>
+  
     
 
 <!-- Testimonial Section -->
@@ -181,40 +236,38 @@
             <h3 class="text-lg font-semibold mb-4">Lihat Video Kepuasan Pelanggan Kami!</h3>
             <div class="flex justify-center">
                 <iframe
-                  class="w-full md:w-3/4 h-72 md:h-[500px] rounded-lg shadow-lg"
-                  src="https://www.youtube.com/embed/Q3fifym8pIg"
-                  title="Testimoni Pelanggan TropicalBite"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen>
+                    class="w-full sm:w-11/12 md:w-3/4 h-56 sm:h-72 md:h-[500px] rounded-lg shadow-lg"
+                    src="https://www.youtube.com/embed/Q3fifym8pIg"
+                    title="Testimoni Pelanggan TropicalBite"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
                 </iframe>
-              </div>
-              
-          </div>
-          
+            </div>            
     </section>
 
 <!-- Section Buah Tropis Unggulan -->
     <section id="buah-unggulan" class="bg-[#ffeb3b] py-10 sm:py-20 text-center">
     <h2 class="text-2xl sm:text-3xl font-bold mb-4">Buah Tropis Unggulan Kami</h2>
     <p class="text-lg sm:text-xl mb-8">Kami menyediakan buah tropis berkualitas tinggi langsung dari petani terbaik.</p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6">
+    <!-- Container Card -->
+    <div class="flex overflow-x-auto space-x-4 px-6 snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:space-x-0 sm:gap-6">
         <!-- Card Template -->
-        <div class="bg-white p-6 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-xl">
+        <div class="min-w-[80%] sm:min-w-0 bg-white p-6 rounded-lg shadow-md snap-start ...">
             <img src="kelapa 2.webp" alt="Kelapa Muda" class="w-full h-48 object-cover rounded-md mb-4">
             <h3 class="font-semibold text-xl mb-2">Kelapa Muda</h3>
             <p class="text-sm text-gray-600 mb-4">Segar dan menyegarkan dengan air alami yang kaya elektrolit.</p>
             <a href="#" class="text-blue-500">Learn More</a>
         </div>
 
-        <div class="bg-white p-6 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-xl">
+        <div class="min-w-[80%] sm:min-w-0 bg-white p-6 rounded-lg shadow-md snap-start ...">
             <img src="mangga.webp" alt="Mangga Harum Manis" class="w-full h-48 object-cover rounded-md mb-4">
             <h3 class="font-semibold text-xl mb-2">Mangga Harum Manis</h3>
             <p class="text-sm text-gray-600 mb-4">Manis, juicy, dan kaya vitamin C.</p>
             <a href="#" class="text-blue-500">Learn More</a>
         </div>
 
-        <div class="bg-white p-6 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-xl">
+        <div class="min-w-[80%] sm:min-w-0 bg-white p-6 rounded-lg shadow-md snap-start ...">
             <img src="nanas.jpg" alt="Nanas Madu" class="w-full h-48 object-cover rounded-md mb-4">
             <h3 class="font-semibold text-xl mb-2">Nanas Madu</h3>
             <p class="text-sm text-gray-600 mb-4">Segar, manis alami, dan kaya antioksidan.</p>
@@ -225,28 +278,31 @@
 
     
 <!-- Footer-->
-    <footer id="fruits" class="bg-[#f9a825] py-10 px-6 text-black font-sans">
-        <div class="max-w-screen-xl mx-auto flex flex-col lg:flex-row justify-between gap-10">
-            <!-- Left Section -->
-            <div class="lg:max-w-xs">
-                <h2 class="text-2xl font-bold">TROPICALBITE</h2>
-                <h3 class="text-xl font-bold mt-5">Artikel Terbaru</h3>
-                <h4 class="text-lg mt-3 mb-3">Siap Menikmati Kesegaran Buah Tropis?</h4>
-                <p class="text-sm leading-relaxed">
+<footer id="fruits" class="bg-[#f9a825] py-10 px-6 text-black font-sans text-sm sm:text-base">
+    <div class="max-w-screen-xl mx-auto">
+        <!-- Konten Utama: Grid responsif -->
+        <div class="flex flex-row overflow-x-auto space-x-6 lg:overflow-visible lg:space-x-0 lg:flex-row justify-between gap-6 lg:gap-10">
+            <!-- Kiri: Brand + Artikel -->
+            <div class="min-w-[250px] lg:max-w-xs flex-shrink-0">
+                <h2 class="text-xl sm:text-2xl font-bold">TROPICALBITE</h2>
+                <h3 class="text-lg sm:text-xl font-bold mt-5">Artikel Terbaru</h3>
+                <h4 class="text-base mt-3 mb-3">Siap Menikmati Kesegaran Buah Tropis?</h4>
+                <p class="text-xs sm:text-sm leading-relaxed">
                     Buah tropis kaya akan nutrisi, menyegarkan, dan cocok untuk gaya hidup sehat. 
                     Mulai dari mangga yang manis hingga kelapa muda yang menyegarkan, jelajahi kelezatan 
                     buah alami yang kaya vitamin dan mineral.
                 </p>
             </div>
-    
-            <!-- Vertical Line (only visible in large screens) -->
-            <div class="lg:border-l-2 lg:h-auto border-black lg:mx-10"></div>
-    
-            <!-- Right Section -->
-            <div class="flex flex-wrap gap-10 lg:gap-20">
-                <div class="min-w-[200px]">
-                    <h3 class="text-xl font-bold">Products</h3>
-                    <ul class="list-none p-0 text-sm">
+
+            <!-- Garis Pemisah (hanya tampil di desktop) -->
+            <div class="hidden lg:block lg:border-l-2 lg:h-auto border-black lg:mx-10"></div>
+
+            <!-- Kanan: Produk & Company -->
+            <div class="flex flex-row space-x-6 flex-shrink-0 lg:flex-wrap lg:space-x-0 lg:gap-20">
+                <!-- Produk Kolom 1 -->
+                <div class="min-w-[160px]">
+                    <h3 class="text-base sm:text-lg font-bold">Products</h3>
+                    <ul class="list-none p-0 text-xs sm:text-sm">
                         <li>Nanas Madu</li>
                         <li>Jeruk Bali</li>
                         <li>Kelapa Muda</li>
@@ -258,8 +314,10 @@
                         <li>Mangga Harum Manis</li>
                     </ul>
                 </div>
-                <div class="min-w-[200px]">
-                    <ul class="list-none p-0 text-sm">
+
+                <!-- Produk Kolom 2 -->
+                <div class="min-w-[160px]">
+                    <ul class="list-none p-0 text-xs sm:text-sm">
                         <li>Durian</li>
                         <li>Salak</li>
                         <li>Belimbing</li>
@@ -271,9 +329,11 @@
                         <li>Alpukat</li>
                     </ul>
                 </div>
-                <div class="min-w-[200px]">
-                    <h3 class="text-xl font-bold">Company</h3>
-                    <ul class="list-none p-0 text-sm">
+
+                <!-- Company -->
+                <div class="min-w-[160px]">
+                    <h3 class="text-base sm:text-lg font-bold">Company</h3>
+                    <ul class="list-none p-0 text-xs sm:text-sm">
                         <li>Tentang Kami</li>
                         <li>Blog</li>
                         <li>Karier</li>
@@ -283,14 +343,16 @@
                 </div>
             </div>
         </div>
-    
-        <!-- Bottom Footer -->
+
+        <!-- Footer Bawah -->
         <div class="text-center mt-10 text-xs">
             © 2024 TropicalBite – Segar Alami Setiap Hari | 
             <a href="#" class="text-black no-underline">Privasi</a> – 
             <a href="#" class="text-black no-underline">Syarat & Ketentuan</a>
         </div>
-    </footer>
-    
+    </div>
+</footer>
+
+
 </body>
 </html>
